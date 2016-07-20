@@ -41,6 +41,10 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- class beans -->
 	<bean id="loginDao" class="com.sample.dao.LoginDaoImp"></bean>
-	<bean id="abc" class="com.sample.controller.SampleController"></bean>
+	
+	<!-- Controller beans -->
+	<!-- <bean id="abc" class="com.sample.controller.SampleController"></bean> -->
 </beans>

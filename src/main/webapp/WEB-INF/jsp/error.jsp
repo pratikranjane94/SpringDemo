@@ -8,6 +8,6 @@
 </head>
 <body>
 Error in login
-<%-- <jsp:include page="login.jsp"></jsp:include> --%>
+<jsp:include page="login.jsp"></jsp:include>
 </body>
 </html>
