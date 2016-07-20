@@ -7,4 +7,5 @@ import com.sample.dto.Login;
 public interface LoginDao {
 public boolean isValid(String username, String password);
 public List<Login> showList();
+public List<Login> delete(int id);
 }

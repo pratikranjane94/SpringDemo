@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sample.dao.LoginDaoImp;
 import com.sample.dto.Login;
 
-@Controller//("abc")
+@Controller // ("abc")
 public class SampleController {
 	@Autowired
 	LoginDaoImp loginDaoImp;
@@ -34,26 +34,37 @@ public class SampleController {
 	public String redirect(@Valid @ModelAttribute("validate") Login login, BindingResult result) {
 		String username = login.getUsername();
 		String password = login.getPassword();
-		System.out.println(username+" "+password);
-		
-		if(result.hasErrors()){
+		System.out.println(username + " " + password);
+
+		if (result.hasErrors()) {
 			System.out.println("errorfound");
 			return "login";
 		}
-		
-		boolean found=loginDaoImp.isValid(username, password);
-	
+
 		if (loginDaoImp.isValid(username, password))
 			return "success";
 		else
 			return "error";
 	}
-	@RequestMapping(value="list",method=RequestMethod.GET)
-	public String showList()
-	{
-		List list=loginDaoImp.showList();
-		return "login";
-		
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String showList(Model model) {
+		model.addAttribute("list", loginDaoImp.showList());
+		model.addAttribute("login", new Login());
+		return "list";
+
+	}
+
+	@RequestMapping(value = "list/delete/{id}", method = RequestMethod.GET)
+	public String delete(@ModelAttribute("delete/{id}") Login login, BindingResult result, Model model) {
+		System.out.println("Id:" + login.getId());
+		List list = loginDaoImp.delete(login.getId());
+
+		if (list != null || list.size() > 0) {
+			model.addAttribute("list",list);
+			return "list";
+		} else
+			return "error";
 	}
 
 }
