@@ -17,7 +17,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/login" />
+		<property name="url" value="jdbc:mysql://localhost:3306/logindemo" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -41,4 +41,6 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="loginDao" class="com.sample.dao.LoginDaoImp"></bean>
+	<bean id="abc" class="com.sample.controller.SampleController"></bean>
 </beans>

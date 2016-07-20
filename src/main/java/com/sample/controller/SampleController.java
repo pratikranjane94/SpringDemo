@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sample.dao.LoginDaoImp;
 import com.sample.dto.Login;
 
-@Controller
+@Controller("abc")
 public class SampleController {
 	@Autowired
 	LoginDaoImp loginDaoImp;
@@ -29,9 +29,9 @@ public class SampleController {
 	public String redirect(@ModelAttribute("login") Login login, BindingResult result) {
 		String username = login.getUsername();
 		String password = login.getPassword();
-		
+		System.out.println(username+" "+password);
 		boolean found=loginDaoImp.isValid(username, password);
-		System.out.println(username+" "+password+" "+found);
+	
 		if (loginDaoImp.isValid(username, password))
 			return "success";
 		else
