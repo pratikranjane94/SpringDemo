@@ -16,13 +16,13 @@
 <input type="submit" value="Login"> 
 </form> -->
 	<form:form action="login" commandName="validate" method="get">
-		<h3>Username</h3>
+		<h3>User Login</h3>
 		<%-- <form:input path="username" /> --%>
-		<input type="text" name="username">
+		User Name:<input type="text" name="username">
 		<form:errors path="username" />
-		<h1>login page</h1>
+		<br>
 		<%-- <form:password path="password" /> --%>
-		<input type="text" name="password">
+		Password:<input type="text" name="password">
 		<form:errors path="password" />
 		<br>
 

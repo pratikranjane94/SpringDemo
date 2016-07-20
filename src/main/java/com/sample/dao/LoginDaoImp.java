@@ -53,10 +53,10 @@ public class LoginDaoImp implements LoginDao {
 		session = sessionFactory.openSession();
 		Query query = session.createQuery("delete from Login where id=?");
 		query.setInteger(0, id);
-		query.executeUpdate();
-		Query q=session.createQuery("from Login");
+		query.executeUpdate();	//user deleted
+		Query q=session.createQuery("from Login");	//getting new list after deletion 
 		List<Login> list=q.list();
-		return list;
+		return list;	//returning new list
 
 	}
 

@@ -20,33 +20,36 @@ public class SampleController {
 	@Autowired
 	LoginDaoImp loginDaoImp;
 
-	@RequestMapping(value = "sample.html", method = RequestMethod.GET)
+	// redirect to success page from index
+	@RequestMapping(value = "push", method = RequestMethod.GET)
 	public String demo() {
-		return "hello";
+		return "success";
 	}
 
+	// redirect to login page from index
 	@RequestMapping(value = "loginpage", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
 
+	// checking username and password
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String redirect(@Valid @ModelAttribute("validate") Login login, BindingResult result) {
-		String username = login.getUsername();
-		String password = login.getPassword();
-		System.out.println(username + " " + password);
-
-		if (result.hasErrors()) {
+		
+		// validation
+		if (result.hasErrors()) { 
 			System.out.println("errorfound");
 			return "login";
+		} else {
+			if (loginDaoImp.isValid(login.getUsername(),login.getPassword())) // if username and password matched
+															
+				return "success";
+			else
+				return "error";
 		}
-
-		if (loginDaoImp.isValid(username, password))
-			return "success";
-		else
-			return "error";
 	}
 
+	// displaying all users
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String showList(Model model) {
 		model.addAttribute("list", loginDaoImp.showList());
@@ -55,13 +58,14 @@ public class SampleController {
 
 	}
 
+	// delete user by id
 	@RequestMapping(value = "list/delete/{id}", method = RequestMethod.GET)
 	public String delete(@ModelAttribute("delete/{id}") Login login, BindingResult result, Model model) {
 		System.out.println("Id:" + login.getId());
-		List list = loginDaoImp.delete(login.getId());
+		List list = loginDaoImp.delete(login.getId()); // user deleted
 
 		if (list != null || list.size() > 0) {
-			model.addAttribute("list",list);
+			model.addAttribute("list", list);
 			return "list";
 		} else
 			return "error";
